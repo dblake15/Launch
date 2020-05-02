@@ -1,0 +1,42 @@
+  ---
+  apiVersion: "apps/v1"
+    kind: "Deployment"
+    metadata:
+      name: "app"
+      namespace: "default"
+      labels:
+        app: "app"
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: "app"
+      template:
+        metadata:
+          labels:
+            app: "app"
+        spec:
+          containers:
+          - name: "front-sha256-1"
+            image: "gcr.io/conductive-fold-275020/front@sha256:2587a3ae18e96d500a669357ff6fe13c9cbdedbe79139ef8be90568fdc5ba5e2"
+    ---
+    apiVersion: "autoscaling/v2beta1"
+    kind: "HorizontalPodAutoscaler"
+    metadata:
+      name: "app-hpa-keot"
+      namespace: "default"
+      labels:
+        app: "app"
+    spec:
+      scaleTargetRef:
+        kind: "Deployment"
+        name: "app"
+        apiVersion: "apps/v1"
+      minReplicas: 1
+      maxReplicas: 5
+      metrics:
+      - type: "Resource"
+        resource:
+          name: "cpu"
+          targetAverageUtilization: 80
+    
