@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: first
+spec:
+    replicas: 1 #how many pods I want, the pods that run the docker image
+    selector:
+        matchLabels:
+            app: first
+    template:
+        metadata:
+            labels:
+                app: first
+    spec:
+        containers: #where is our container?
+        - name: firsttry
+            image: dblake15/capstone:firsttry
+            ports:
+            - containerPort: 80

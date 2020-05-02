@@ -1,0 +1,23 @@
+
+# Be sure to change the environment variables below for DOCKERUSER and DOCKERPASS
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firsttry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: firsttry
+  template:
+    metadata:
+      labels:
+        app: firsttry
+    spec:
+      containers:
+      - name: firsttry
+        image: dblake15/capstone:firsttry
+        ports:
+        - containerPort: 8080
+        #- name: DEPLOYED
+        #  value: "True"
