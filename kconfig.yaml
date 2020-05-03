@@ -1,42 +1,42 @@
-apiVersion: apps/v1
-    kind: Deployment
+---
+    apiVersion: "apps/v1"
+    kind: "Deployment"
     metadata:
-      name: app
-      namespace: default
+      name: "app"
+      namespace: "default"
       labels:
-        app: app
+        app: "app"
     spec:
       replicas: 3
       selector:
         matchLabels:
-          app: app
+          app: "app"
       template:
         metadata:
           labels:
-            app: app
-        #spec:
-          #containers:
-          #- name: front
-          #front-sha256-1
-            #image: gcr.io/conductive-fold-275020/front:latest
-            #@sha256:2587a3ae18e96d500a669357ff6fe13c9cbdedbe79139ef8be90568fdc5ba5e2
-    apiVersion: autoscaling/v2beta1
-    kind: HorizontalPodAutoscaler
+            app: "app"
+        spec:
+          containers:
+          - name: "front-sha256-1"
+            image: "gcr.io/conductive-fold-275020/front@sha256:f7505d703389d0a4afe7720262860d649bcc6706894a761001a983743d5c1528"
+    ---
+    apiVersion: "autoscaling/v2beta1"
+    kind: "HorizontalPodAutoscaler"
     metadata:
-      name: app-hpa-keot
-      namespace: default
+      name: "app-hpa-rc5n"
+      namespace: "default"
       labels:
-        app: app
+        app: "app"
     spec:
       scaleTargetRef:
-        kind: Deployment
-        name: app
-        apiVersion: apps/v1
+        kind: "Deployment"
+        name: "app"
+        apiVersion: "apps/v1"
       minReplicas: 1
       maxReplicas: 5
       metrics:
-      - type: Resource
+      - type: "Resource"
         resource:
-          name: cpu
+          name: "cpu"
           targetAverageUtilization: 80
     
