@@ -17,13 +17,13 @@
             app: "app"
         spec:
           containers:
-          - name: "front-sha256-1"
-            image: "gcr.io/conductive-fold-275020/front@sha256:f7505d703389d0a4afe7720262860d649bcc6706894a761001a983743d5c1528"
+          - name: "front"
+            image: "gcr.io/conductive-fold-275020/front:latest"
     ---
     apiVersion: "autoscaling/v2beta1"
     kind: "HorizontalPodAutoscaler"
     metadata:
-      name: "app-hpa-rc5n"
+      name: "app"
       namespace: "default"
       labels:
         app: "app"
