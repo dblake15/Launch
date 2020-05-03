@@ -3,20 +3,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: firsttry
+  name: app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: firsttry
+      app: app
   template:
     metadata:
       labels:
-        app: firsttry
+        app: app
     spec:
       containers:
-      - name: firsttry
-        image: dblake15/capstone:firsttry
+      - name: front
+        image: gcr.io/conductive-fold-275020/front:latest
         ports:
         - containerPort: 8080
         #- name: DEPLOYED
